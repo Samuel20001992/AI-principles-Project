@@ -24,7 +24,6 @@ def astar(graph, start_node, target_node, heuristic):
                 priority = new_cost + heuristic[neighbor]
                 heapq.heappush(queue, (priority, neighbor))
                 paths[neighbor] = paths[current_node] + [neighbor]
-                print(queue)
 
     return None
 

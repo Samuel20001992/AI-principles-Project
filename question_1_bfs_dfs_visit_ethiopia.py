@@ -102,6 +102,7 @@ def dfs(graph, start_node, target_node, visited=None, path=None):
             if result is not None:
                 return result
 
+
     path.pop()
 
     return None
@@ -116,13 +117,13 @@ def bfs(graph, start_node, target_node):
     visited.add(start_node)
     # initialize queue with start node and path to start node
     queue.append((start_node, [start_node]))
-    
+   
 
     while queue:
         
         # Pop node from the queue
         current_node, path = queue.popleft()
-
+        
         # check if current node is target node 
         if current_node == target_node:
             return path

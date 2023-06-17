@@ -115,7 +115,7 @@ def ucs_path(graph, start_node, target_node):
 
     return None
 
-# returns the neigbor with the least cost
+# returns the neigbor with the least
 def ucs_least_cost(start, goal_states):
     queue = PriorityQueue()
     queue.put((0, start))  
