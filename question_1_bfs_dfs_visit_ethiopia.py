@@ -1,3 +1,4 @@
+# Data Structure Reprentation Using Dictonary Data Structure 
 graph = {
         'Addis Ababa': ['Adama', 'Ambo', 'Debre Berhan'],
         'Adama': ['Matahara', 'Asella', 'Batu', 'Addis Ababa'], 
@@ -90,9 +91,11 @@ def dfs(graph, start_node, target_node, visited=None, path=None):
     path.append(start_node)
     visited.add(start_node)
 
+    # Check if start node is target node
     if start_node == target_node:
         return path
 
+    # Navigate Through the graph
     for neighbor in graph[start_node]:
         if neighbor not in visited:
             result = dfs(graph, neighbor, target_node, visited, path)
@@ -107,23 +110,28 @@ def dfs(graph, start_node, target_node, visited=None, path=None):
 from collections import deque
 
 def bfs(graph, start_node, target_node):
+    # Create a double ended Queue 
     queue = deque()
     visited = set()
     visited.add(start_node)
+    # initialize queue with start node and path to start node
     queue.append((start_node, [start_node]))
-    # print(queue)
+    
 
     while queue:
         
-        print(queue)
+        # Pop node from the queue
         current_node, path = queue.popleft()
 
+        # check if current node is target node 
         if current_node == target_node:
             return path
-
+        
+        # Navigate through the neigbors of the current node
         for neighbor in graph[current_node]:
             if neighbor not in visited:
                 visited.add(neighbor)
+                # Add the neighbor and path to neighbor to the queue if not visited
                 queue.append((neighbor, path + [neighbor]))
 
     return None

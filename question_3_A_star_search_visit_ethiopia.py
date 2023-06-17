@@ -9,14 +9,17 @@ def astar(graph, start_node, target_node, heuristic):
 
    
     while queue:
+        # pop priority level and node from the queue
         current_priority, current_node = heapq.heappop(queue)
 
         if current_node == target_node:
             return paths[current_node]
         
         for neighbor, edge_cost in graph[current_node].items():
+            # update the new cost with the previous cost and the huristic value of the neigbor cost
             new_cost = visited[current_node] + edge_cost + heuristic[neighbor]
             if neighbor not in visited or new_cost < visited[neighbor]:
+                # update previous node cost with the new found cost, this changes the value only if it is already visted
                 visited[neighbor] = new_cost
                 priority = new_cost + heuristic[neighbor]
                 heapq.heappush(queue, (priority, neighbor))
@@ -108,7 +111,7 @@ graph = {
 }
 
 
-
+# define the huristic values
 heuristic = {
              'Addis Ababa':26,
              'Adama':23,

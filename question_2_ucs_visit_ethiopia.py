@@ -3,6 +3,7 @@
 import heapq
 from queue import PriorityQueue
 
+# Dictonary Data structure 
 graph = {
              'Addis Ababa': {'Adama':3, 'Ambo':5, 'Debre Berhan':5},
              'Adama': {'Matahara':3, 'Asella':4, 'Batu':4, 'Addis Ababa':3}, 
@@ -89,19 +90,24 @@ graph = {
 
 
 def ucs_path(graph, start_node, target_node):
+    # initialize queue and visited with start node and it's cost
     queue = [(0, start_node)]  
     visited = {start_node: 0}
     paths = {start_node: []}
 
     while queue:
+        # initalize current node and current cost from the queue
         current_cost, current_node = heapq.heappop(queue)
 
+        # check if current node is target node, if so return path
         if current_node == target_node:
             return paths[current_node]
 
         for neighbor, edge_cost in graph[current_node].items():
+            # update cost with the current nodes by adding  edge_cost of the nighbor
             new_cost = current_cost + edge_cost
 
+            # if niegbor is not visted or if it is visited but its g(x) is less than the previous one update the cost
             if neighbor not in visited or new_cost < visited[neighbor]:
                 visited[neighbor] = new_cost
                 heapq.heappush(queue, (new_cost, neighbor))
@@ -109,6 +115,7 @@ def ucs_path(graph, start_node, target_node):
 
     return None
 
+# returns the neigbor with the least cost
 def ucs_least_cost(start, goal_states):
     queue = PriorityQueue()
     queue.put((0, start))  

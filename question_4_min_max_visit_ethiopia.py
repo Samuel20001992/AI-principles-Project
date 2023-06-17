@@ -1,3 +1,5 @@
+
+# define the node structure for the tree 
 class Node:
     def __init__(self, name, quality, level, children=None) -> None:
         self.name = name
@@ -8,6 +10,7 @@ class Node:
     def add_child(self, child):
         self.children.append(child)
 
+# returns the maximum quality of the children 
 def get_child_with_max_value(parent):
     max_child = None
     max_value = float('-inf')
@@ -19,6 +22,7 @@ def get_child_with_max_value(parent):
     
     return max_child
 
+# returns the mimimum quality of the children 
 def get_child_with_min_value(parent):
     min_child = None
     min_value = float('+inf')
@@ -30,16 +34,17 @@ def get_child_with_min_value(parent):
     
     return min_child
 
+# print the nodes like a tree
 def print_tree(node, level=0):
     # Print the current node
     indent = "      " * level
     print(indent  + ' '+ str(node.name) + ' quality ' + str(node.quality))
 
-    # Print children recursively
+    # Print children 
     for child in node.children:
         print_tree(child , level + 1)
 
-
+# define the tree using Node
 root = Node("Addis Ababa", 0, 1)
 
 child1 = Node("Ambo", 0, 2)
@@ -107,11 +112,14 @@ minmax_2 = [child1, child2, child3]
 minmax_3 = [root]
 
 level_2 = []
+
+# traverse through mimmax_1 
 for parent in minmax_1:
     parent = get_child_with_max_value(parent)
     level_2.append(parent)
 
 
+# update the grandchild with the maximum of greatgrandchild
 grandchild1.quality = level_2[0].quality
 grandchild2.quality = level_2[1].quality
 grandchild3.quality = level_2[2].quality
@@ -119,12 +127,13 @@ grandchild4.quality = level_2[3].quality
 grandchild5.quality = level_2[4].quality
 grandchild6.quality = level_2[5].quality
 
+# tarverse through minmax 2
 level_1 = []
 for parent in minmax_2:
     parent = get_child_with_min_value(parent)
     level_1.append(parent)
 
-
+# update the child with the mimimum of grandchild
 child1.quality = level_1[0].quality
 child2.quality = level_1[1].quality
 child3.quality = level_1[2].quality
@@ -135,6 +144,7 @@ parent = get_child_with_max_value(root)
 level_0 = []
 level_0.append(parent)
 
+# update the root with the maximum of child
 root.quality = level_0[0].quality
 
 print_tree(root)
